@@ -16,5 +16,8 @@ COPY . .
 # Expose the port on which the app will run
 EXPOSE 3000
 
+ENV REACT_APP_AIRLINES_API_URL ${REACT_APP_AIRLINES_API_URL}
+ENV REACT_APP_FLIGHTS_API_URL ${REACT_APP_FLIGHTS_API_URL}
+
 # Start the React development server
 CMD ["npm", "start"]
