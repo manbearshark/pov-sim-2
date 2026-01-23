@@ -11,7 +11,7 @@ COPY . .
 RUN gradle clean bootJar
 
 # Step 2: Use a lightweight JDK image for running the app
-FROM eclipse-temurin:17-jdk-alpine
+FROM --platform=linux/amd64 eclipse-temurin:17-jdk-alpine
 
 # Set the working directory for the runtime container
 WORKDIR /app
