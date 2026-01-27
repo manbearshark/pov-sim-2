@@ -18,9 +18,14 @@ WORKDIR /app
 
 # Copy the JAR file from the build stage
 COPY --from=build /app/build/libs/*.jar app.jar
+COPY ./grafana-opentelemetry-java.jar grafana-opentelemetry-java.jar
 
 # Expose the port the application runs on
 EXPOSE 8080
 
+ENV OTEL_RESOURCE_ATTRIBUTES="service.name=airlines,service.namespace=backend,deployment.environment=prod" 
+ENV OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
+ENV OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf" 
+
 # Set the command to run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-javaagent:grafana-opentelemetry-java.jar", "-jar", "app.jar"]

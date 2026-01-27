@@ -2,3 +2,4 @@ node_modules
 .env
 .gradle
 __pycache__
+.DS_store
