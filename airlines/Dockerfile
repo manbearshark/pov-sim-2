@@ -18,10 +18,11 @@ WORKDIR /app
 
 # Copy the JAR file from the build stage
 COPY --from=build /app/build/libs/*.jar app.jar
+COPY ./pyroscope.jar pyroscope.jar
 COPY ./grafana-opentelemetry-java.jar grafana-opentelemetry-java.jar
 
 # Expose the port the application runs on
 EXPOSE 8080
 
 # Set the command to run the application
-ENTRYPOINT ["java", "-javaagent:grafana-opentelemetry-java.jar", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-javaagent:grafana-opentelemetry-java.jar", "-javaagent:pyroscope.jar", "-jar", "app.jar"]
