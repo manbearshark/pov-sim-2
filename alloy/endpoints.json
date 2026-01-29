@@ -1,16 +1,16 @@
 {
     "metrics": {
-        "url": "<metricsUrl>",
+        "url": "https://prometheus-prod-67-prod-us-west-0.grafana.net/api/prom/push",
         "basicAuth": {
-            "username": "<metricsUsername>",
-            "password": "<metricsPassword>"
+            "username": "2939661",
+            "password": "glc_eyJvIjoiMTY1MjM4NiIsIm4iOiJzdGFjay0xNTA3NzE0LWFsbG95LXBvdnNpbXRva2VuIiwiayI6InNYZHZ0M1k3OHBLZzU0M0k2cjhyVDJrNyIsIm0iOnsiciI6InByb2QtdXMtd2VzdC0wIn19"
         }
     },
     "logs": {
-        "url": "<logsUrl>",
+        "url": "https://otlp-gateway-prod-us-west-0.grafana.net/otlp",
         "basicAuth": {
-            "username": "<logsUsername>",
-            "password": "<logsPassword>"
+            "username": "2939661",
+            "password": "glc_eyJvIjoiMTY1MjM4NiIsIm4iOiJzdGFjay0xNTA3NzE0LWFsbG95LXBvdnNpbXRva2VuIiwiayI6InNYZHZ0M1k3OHBLZzU0M0k2cjhyVDJrNyIsIm0iOnsiciI6InByb2QtdXMtd2VzdC0wIn19"
         }
     },
     "traces": {

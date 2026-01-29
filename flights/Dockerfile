@@ -16,5 +16,9 @@ COPY . .
 # Expose port 5001
 EXPOSE 5001
 
+ENV OTEL_RESOURCE_ATTRIBUTES="service.name=flights,service.namespace=backend,deployment.environment=prod" 
+ENV OTEL_EXPORTER_OTLP_ENDPOINT=http://alloy:4318
+ENV OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf"
+
 # Specify the command to run your Flask app
-CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=5001"]
+CMD ["opentelemetry-instrument", "python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=5001"]

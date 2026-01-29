@@ -1,6 +1,11 @@
 services:
   alloy:
-    image: grafana/alloy:v1.9.1
+    profiles: [backends]
+    container_name: alloy
+    hostname: alloy
+    networks:
+      - pov-sim
+    image: grafana/alloy:latest
     ports:
       - "12350:12350"
       - "12347:12345"
@@ -9,28 +14,42 @@ services:
       - "55679:55679"
       - "4317:4317"
       - "4318:4318"
+      - "9090:9090"
+    environment:
+      - CLOUD_OTLP_ENDPOINT=${CLOUD_OTLP_ENDPOINT}
+      - CLOUD_OTLP_USERNAME=${CLOUD_OTLP_USERNAME}
+      - CLOUD_OTLP_PASSWORD=${CLOUD_OTLP_PASSWORD}
     volumes:
-      - "./alloy/config.alloy:/etc/alloy/config.alloy"
-      - "./alloy/endpoints.json:/etc/alloy/endpoints.json"
+      - ./alloy/config.alloy:/etc/alloy/config.alloy
     command: [
       "run",
       "--server.http.listen-addr=0.0.0.0:12345",
+      "--storage.path=/var/lib/alloy/data",
       "--stability.level=public-preview",
       "/etc/alloy/config.alloy",
     ]
   airlines:
+    hostname: airlines
+    networks:
+      - pov-sim
     build: 
       context: ./airlines
     ports:
       - "8080:8080"
     profiles: [backends]
   flights:
+    hostname: flights
+    networks:
+      - pov-sim
     build: 
       context: ./flights
     ports:
       - "5001:5001"
     profiles: [backends]
   frontend:
+    hostname: frontend
+    networks:
+      - pov-sim
     build: 
       context: ./frontend
     ports:
@@ -42,3 +61,7 @@ services:
     environment: 
       REACT_APP_AIRLINES_API_URL: ${REACT_APP_AIRLINES_API_URL}
       REACT_APP_FLIGHTS_API_URL: ${REACT_APP_FLIGHTS_API_URL}
+
+networks:
+  pov-sim:
+    driver: bridge
