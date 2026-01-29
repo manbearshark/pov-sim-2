@@ -23,9 +23,5 @@ COPY ./grafana-opentelemetry-java.jar grafana-opentelemetry-java.jar
 # Expose the port the application runs on
 EXPOSE 8080
 
-ENV OTEL_RESOURCE_ATTRIBUTES="service.name=airlines,service.namespace=backend,deployment.environment=prod" 
-ENV OTEL_EXPORTER_OTLP_ENDPOINT=http://alloy:4318
-ENV OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf" 
-
 # Set the command to run the application
 ENTRYPOINT ["java", "-javaagent:grafana-opentelemetry-java.jar", "-jar", "app.jar"]

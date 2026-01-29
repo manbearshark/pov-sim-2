@@ -37,6 +37,10 @@ services:
     ports:
       - "8080:8080"
     profiles: [backends]
+    environment:
+      - OTEL_SERVICE_NAME=airlines
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://alloy:4317
+      - OTEL_EXPORTER_OTLP_PROTOCOL=grpc    
   flights:
     hostname: flights
     networks:
