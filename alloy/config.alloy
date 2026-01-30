@@ -133,6 +133,7 @@ otelcol.processor.transform "add_resource_attributes_as_metric_attributes" {
 
 	output {
 		metrics = [otelcol.processor.batch.default.input]
+		logs =   [otelcol.processor.batch.default.input]
 	}
 }
 

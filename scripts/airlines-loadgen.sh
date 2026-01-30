@@ -17,8 +17,8 @@
 
 LINE_SEPARATOR="----------------------------------------------------------"
 
-DEFAULT_ERROR_RATE=0
-DEFAULT_DURATION=60
+DEFAULT_ERROR_RATE=0.1
+DEFAULT_DURATION=90
 DEFAULT_BASE_URL="http://localhost:8080"
 
 BASIC_GET_ENDPOINTS=(
